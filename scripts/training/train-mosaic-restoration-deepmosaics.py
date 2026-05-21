@@ -167,7 +167,7 @@ val_loader = DataLoader(val_set,
 '''
 --------------------------Train--------------------------
 '''
-device = "cuda:0"
+device = "mps" if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available() else ("cuda:0" if torch.cuda.is_available() else "cpu")
 train_loader_size = len(train_loader)
 print(f"train_loader size: {train_loader_size}")
 for epoch in range(opt["n_epoch"]):
