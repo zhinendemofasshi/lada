@@ -32,7 +32,7 @@ model.fc = nn.Linear(num_features, len(train_data.classes))
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
-device = torch.device("cuda:0")
+device = torch.device("mps" if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available() else ("cuda:0" if torch.cuda.is_available() else "cpu"))
 model = model.to(device)
 
 num_epochs = 15
